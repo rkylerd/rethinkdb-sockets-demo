@@ -1,26 +1,29 @@
 import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import { Routes, Route, BrowserRouter as Router, useRoutes } from 'react-router-dom'
+import { SoundPlayerProvider } from './contexts/soundPlayer'
+import GlobalSoundPlayer from './components/GlobalPlayer'
+import Search from './pages/Search';
+import Playlist from './pages/Playlist';
+
+const AppRouter = () => (
+  useRoutes([
+    { path: "/search", element: <Search /> },
+    { path: "/playlist", element: <Playlist /> },
+    { path: "/", element: <Search /> },
+    // ...
+  ])
+);
 
 function App() {
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+    <SoundPlayerProvider>
+      <GlobalSoundPlayer />
+      <Router>
+        <AppRouter />
+      </Router>
+    </SoundPlayerProvider>
+  )
 }
 
 export default App;
