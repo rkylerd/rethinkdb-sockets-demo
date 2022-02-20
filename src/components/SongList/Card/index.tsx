@@ -1,11 +1,11 @@
 import React, { FC, useState } from 'react'
-import { Card, ExplicitContainer, PlayingIndicator } from '../tags';
+import { Card, PlayingIndicator } from '../tags';
 import { AlbumArtwork, NameAndArtist } from './tags';
 import { SongDisplayProps } from '..';
-import Options from '../../Options';
 
-const SongCard: FC<SongDisplayProps> = ({ song, setPlaying, isPlaying, addToUpNextQueue, withOptions }) => {
-    const { artworkUrl60, trackName, artistName, trackExplicitness } = song;
+
+const SongCard: FC<SongDisplayProps> = ({ song, setPlaying, isPlaying, extraContentRenderer = (() => <></>) }) => {
+    const { artworkUrl60, trackName, artistName } = song;
     const [isHovered, setHovered] = useState<boolean>(false);
 
     return (
@@ -26,13 +26,7 @@ const SongCard: FC<SongDisplayProps> = ({ song, setPlaying, isPlaying, addToUpNe
                 </AlbumArtwork>
 
                 <div style={{ width: '100%' }}>
-                    {withOptions && <Options style={{ marginLeft: 'auto' }}>
-                        <li tabIndex={1} onKeyPress={(e) => e.currentTarget.click()} onClick={() => addToUpNextQueue(song)}>Add to Up Next</li>
-                        <li tabIndex={1} onKeyPress={(e) => e.currentTarget.click()} onClick={() => window.alert("Psych! Can't believe you thought that would work.")}>Download (free)</li>
-                    </Options>}
-                    <span style={{ margin: 'auto', textAlign: 'center' }}>
-                        {trackExplicitness === 'explicit' && <ExplicitContainer>E</ExplicitContainer>}
-                    </span>
+                    {extraContentRenderer(song)}
                 </div>
             </div>
 

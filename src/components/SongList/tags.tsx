@@ -75,6 +75,7 @@ export const ExplicitContainer = styled.span`
 export const FlexContainer = styled.div<{ withColumns?: boolean; }>`
     display: flex;
     flex-wrap: wrap;
+    align-content: flex-start;
     ${({ withColumns }) => withColumns && css`
         flex-direction: column;
     `}

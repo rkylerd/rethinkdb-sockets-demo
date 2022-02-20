@@ -30,4 +30,5 @@ export type Song = {
     trackTimeMillis: number;
     trackViewUrl: string;
     wrapperType: string;
+    votes?: number;
 };

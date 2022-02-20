@@ -26,6 +26,10 @@ app.use(cors(corsOptions));
 
 app.use('/api', logger, getApiRoutes(io));
 
+app.use((req, res: Response) => {
+    res.sendFile(path.join(__dirname, "..", "build", "index.html"))
+});
+
 http.listen(3001, function () {
     console.log('listening on port 3001');
 });

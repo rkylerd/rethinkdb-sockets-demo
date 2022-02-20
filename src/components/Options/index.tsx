@@ -7,6 +7,7 @@ type OptionsProps = {
     OptionsDisplayElement?: ReactNode;
     insideStaticContainer?: boolean;
 } & Styles;
+
 const defaultOptionsDisplayElement = <OptionsIcon color="#292b2c" size="1x" icon={faEllipsisH} />;
 const Options: FC<OptionsProps> = ({ children, insideStaticContainer = false, OptionsDisplayElement = defaultOptionsDisplayElement, color, ...rest }): JSX.Element => {
     const ref = useRef<HTMLDivElement | null>(null);
